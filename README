@@ -1,0 +1,10 @@
+pygroot 1.0
+
+pygroot is an interpreter of the Groot programming language
+
+See file INSTALL for information about how to install this program
+
+pygroot is released under the General Public License version 3 (GPLv3+). See file COPYING for text of licens.
+
+Copyright (C) 2015 Anton Kovalyov
+Report bugs to: keldzh@gmail.com
