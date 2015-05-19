@@ -2,11 +2,13 @@
 import sys
 import string
 import argparse
+from config import NAME
+from config import VERSION
 
 lex = None
 
 def print_error(msg, is_exit):
-	print("pygroot: ", filename, "(", lineno, "): ", msg)
+	print(NAME + ": ", filename, "(", lineno, "): ", msg)
 	if is_exit:
 		sys.exit(1)
 
@@ -156,13 +158,13 @@ class conveyor:
 
 
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser(prog = "pygroot",
+	parser = argparse.ArgumentParser(prog = NAME,
 		description = "The Groot Programming Language interpreter",
 		epilog = "Report bugs to: keldzh@gmail.com",
 		formatter_class = argparse.RawDescriptionHelpFormatter)
 	parser.add_argument("FILE", help = "path to the file with program on Groot")
 	parser.add_argument("--version", action = "version",
-		version = """pygroot 1.0
+		version = NAME + " " + VERSION + """
 Copyright (C) 2015 Anton Kovalyov
 License GPLv3: GNU GPL version 3 or later <http://www.gnu.org/licenses/gpl-3.0.html>
 This program comes with ABSOLUTELY NO WARRANTY, to the extent permitted by law.

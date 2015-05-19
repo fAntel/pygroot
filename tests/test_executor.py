@@ -2,8 +2,6 @@
 import unittest
 from unittest.mock import MagicMock
 from unittest.mock import patch
-import sys
-sys.path.append("src")
 import pygroot
 
 class text_executor(unittest.TestCase):

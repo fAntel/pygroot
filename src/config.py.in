@@ -1,0 +1,4 @@
+__all__ = ["NAME", "VERSION"]
+
+NAME = "@PACKAGE_NAME@"
+VERSION = "@VERSION@"

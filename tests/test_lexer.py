@@ -1,8 +1,6 @@
 #!/usr/bin/python
 import unittest
 from unittest.mock import MagicMock
-import sys
-sys.path.append("src")
 import pygroot
 
 class test_lexer(unittest.TestCase):
