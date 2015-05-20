@@ -28,6 +28,7 @@ from config import VERSION
 
 lex = None
 
+
 def print_error(msg, is_exit):
 	print(NAME + ": ", filename, "(", lineno, "): ", msg)
 	if is_exit:
@@ -35,10 +36,16 @@ def print_error(msg, is_exit):
 
 
 class lexer:
-	def __init__(self, filename = None):
-		self.tokens = {"iamgroot": "inc", "IamGroot": "dec", "IAMGROOOT": "out",
-			"IAMGROOT": "right", "Iamgroot": "left", "Iamgrooot": "inp",
-			"I'mGroot": "jump", "WeareGroot": "jump_back"}
+	def __init__(self, filename=None):
+		self.tokens = {
+			"iamgroot": "inc",
+			"IamGroot": "dec",
+			"IAMGROOOT": "out",
+			"IAMGROOT": "right",
+			"Iamgroot": "left",
+			"Iamgrooot": "inp",
+			"I'mGroot": "jump",
+			"WeareGroot": "jump_back"}
 		self.lineno = 0
 		self.filename = filename
 		if filename is not None:
@@ -83,7 +90,9 @@ class executor:
 		if self.ptr > 0:
 			self.ptr -= 1
 		else:
-			print_error("warning: program is trying to move pointer in position befor beginning of memory", False)
+			print_error(
+				"warning: program is trying to move pointer in position befor beginning of memory",
+				False)
 
 	def inp(self):
 		self.memory[self.ptr] = ord(sys.stdin.read(1))
@@ -122,9 +131,9 @@ class executor:
 
 
 class conveyor:
-	def __init__(self, test = False):
+	def __init__(self, test=False):
 		# for testing
-		if test == True:
+		if test is True:
 			self.cmds = None
 			self.cmd_ptr = None
 			return
@@ -179,13 +188,16 @@ class conveyor:
 
 
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser(prog = NAME,
-		description = "The Groot Programming Language interpreter",
-		epilog = "Report bugs to: keldzh@gmail.com",
-		formatter_class = argparse.RawDescriptionHelpFormatter)
-	parser.add_argument("FILE", help = "path to the file with program on Groot")
-	parser.add_argument("--version", action = "version",
-		version = NAME + " " + VERSION + """
+	parser = argparse.ArgumentParser(
+		prog=NAME,
+		description="The Groot Programming Language interpreter",
+		epilog="Report bugs to: <keldzh@gmail.com>",
+		formatter_class=argparse.RawDescriptionHelpFormatter)
+	parser.add_argument("FILE", help="path to the file with program on Groot")
+	parser.add_argument(
+		"--version",
+		action="version",
+		version=NAME + " " + VERSION + """
 Copyright (C) 2015 Anton Kovalyov
 License GPLv3: GNU GPL version 3 or later <http://www.gnu.org/licenses/gpl-3.0.html>
 This program comes with ABSOLUTELY NO WARRANTY, to the extent permitted by law.

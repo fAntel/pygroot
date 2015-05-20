@@ -24,6 +24,7 @@ import unittest
 from unittest.mock import MagicMock
 import pygroot
 
+
 class test_lexer(unittest.TestCase):
 	def setUp(self):
 		self.l = pygroot.lexer()
@@ -31,11 +32,12 @@ class test_lexer(unittest.TestCase):
 
 
 	def test_lexer_simple(self):
-		values = ["i am groot", "I am Groot", "I AM GROOOT", "I AM GROOT",
-			"I am groot", "I am grooot", "I'm Groot", "We are Groot"]
-		results = ["inc", "dec", "out", "right", "left", "inp", "jump",
-			"jump_back"]
-		self.l.f.readline = MagicMock(side_effect = values)
+		values = ["i am groot", "I am Groot", "I AM GROOOT",
+			"I AM GROOT", "I am groot", "I am grooot",
+			"I'm Groot", "We are Groot"]
+		results = ["inc", "dec", "out", "right", "left", "inp",
+			"jump", "jump_back"]
+		self.l.f.readline = MagicMock(side_effect=values)
 
 		for i in results:
 			result = self.l.get_token()
@@ -44,11 +46,18 @@ class test_lexer(unittest.TestCase):
 
 
 	def test_lexer_with_whitespaces(self):
-		values = [" i am groot", "I  am Groot", "I AM  GROOOT", "I AM GROOT ",
-			" I  am  groot ", "	I am grooot", "I'm	 Groot", "We  are Groot	"]
-		results = ["inc", "dec", "out", "right", "left", "inp", "jump",
-			"jump_back"]
-		self.l.f.readline = MagicMock(side_effect = values)
+		values = [
+			" i am groot",
+			"I  am Groot",
+			"I AM  GROOOT",
+			"I AM GROOT ",
+			" I  am  groot ",
+			"	I am grooot",
+			"I'm	 Groot",
+			"We  are Groot	"]
+		results = ["inc", "dec", "out", "right", "left", "inp",
+			"jump", "jump_back"]
+		self.l.f.readline = MagicMock(side_effect=values)
 		for i in results:
 			result = self.l.get_token()
 
@@ -57,16 +66,16 @@ class test_lexer(unittest.TestCase):
 
 	def test_lexer_none(self):
 		self.l.f.readline.return_value = ''
-		
+
 		result = self.l.get_token()
-		
+
 		self.assertIsNone(result)
 
 
 	def test_lexer_empty_string(self):
 		values = ["\n", " ", " \n", "	", "i am groot"]
-		self.l.f.readline = MagicMock(side_effect = values)
-		
+		self.l.f.readline = MagicMock(side_effect=values)
+
 		result = self.l.get_token()
 
 		self.assertEqual("inc", result)
@@ -74,8 +83,8 @@ class test_lexer(unittest.TestCase):
 
 	def test_lexer_comment_whole_string(self):
 		values = ["#   ", "	#   dsds", "i am groot"]
-		self.l.f.readline = MagicMock(side_effect = values)
-		
+		self.l.f.readline = MagicMock(side_effect=values)
+
 		result = self.l.get_token()
 
 		self.assertEqual("inc", result)
@@ -83,9 +92,9 @@ class test_lexer(unittest.TestCase):
 
 	def test_lexer_comment_in_string(self):
 		self.l.f.readline.return_value = 'i am groot # ssds'
-		
+
 		result = self.l.get_token()
-		
+
 		self.assertEqual("inc", result)
 
 
