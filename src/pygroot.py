@@ -1,21 +1,51 @@
 #!/usr/bin/python
+#
+#  pygroot.py
+#
+#  Author:
+#       keldzh <keldzh@gmail.com>
+#
+#  Copyright (c) 2015 Anton Kovalyov
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http:#www.gnu.org/licenses/>.
+
 import sys
 import string
 import argparse
+from config import NAME
+from config import VERSION
 
 lex = None
 
+
 def print_error(msg, is_exit):
-	print("pygroot: ", filename, "(", lineno, "): ", msg)
+	print(NAME + ": ", filename, "(", lineno, "): ", msg)
 	if is_exit:
 		sys.exit(1)
 
 
 class lexer:
-	def __init__(self, filename = None):
-		self.tokens = {"iamgroot": "inc", "IamGroot": "dec", "IAMGROOOT": "out",
-			"IAMGROOT": "right", "Iamgroot": "left", "Iamgrooot": "inp",
-			"I'mGroot": "jump", "WeareGroot": "jump_back"}
+	def __init__(self, filename=None):
+		self.tokens = {
+			"iamgroot": "inc",
+			"IamGroot": "dec",
+			"IAMGROOOT": "out",
+			"IAMGROOT": "right",
+			"Iamgroot": "left",
+			"Iamgrooot": "inp",
+			"I'mGroot": "jump",
+			"WeareGroot": "jump_back"}
 		self.lineno = 0
 		self.filename = filename
 		if filename is not None:
@@ -60,7 +90,9 @@ class executor:
 		if self.ptr > 0:
 			self.ptr -= 1
 		else:
-			print_error("warning: program is trying to move pointer in position befor beginning of memory", False)
+			print_error(
+				"warning: program is trying to move pointer in position befor beginning of memory",
+				False)
 
 	def inp(self):
 		self.memory[self.ptr] = ord(sys.stdin.read(1))
@@ -99,9 +131,9 @@ class executor:
 
 
 class conveyor:
-	def __init__(self, test = False):
+	def __init__(self, test=False):
 		# for testing
-		if test == True:
+		if test is True:
 			self.cmds = None
 			self.cmd_ptr = None
 			return
@@ -156,13 +188,16 @@ class conveyor:
 
 
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser(prog = "pygroot",
-		description = "The Groot Programming Language interpreter",
-		epilog = "Report bugs to: keldzh@gmail.com",
-		formatter_class = argparse.RawDescriptionHelpFormatter)
-	parser.add_argument("FILE", help = "path to the file with program on Groot")
-	parser.add_argument("--version", action = "version",
-		version = """pygroot 1.0
+	parser = argparse.ArgumentParser(
+		prog=NAME,
+		description="The Groot Programming Language interpreter",
+		epilog="Report bugs to: <keldzh@gmail.com>",
+		formatter_class=argparse.RawDescriptionHelpFormatter)
+	parser.add_argument("FILE", help="path to the file with program on Groot")
+	parser.add_argument(
+		"--version",
+		action="version",
+		version=NAME + " " + VERSION + """
 Copyright (C) 2015 Anton Kovalyov
 License GPLv3: GNU GPL version 3 or later <http://www.gnu.org/licenses/gpl-3.0.html>
 This program comes with ABSOLUTELY NO WARRANTY, to the extent permitted by law.
