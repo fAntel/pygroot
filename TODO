@@ -1,0 +1,6 @@
+TODO List for next versions:
+	* parameter --classic which change max size of cell to 8 bit
+	* parameter --quite - do not show warnings
+	* some optimization for loops
+	* add gettext for localization of error/warning messages
+

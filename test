@@ -1,1 +1,2 @@
-python -m unittest
+#!/bin/sh
+PYTHONPATH="$PYTHONPATH:src" python -m unittest
