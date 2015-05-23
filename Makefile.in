@@ -791,6 +791,9 @@ uninstall-am: uninstall-dist_docDATA
 .PRECIOUS: Makefile
 
 
+@UNITTEST2_TRUE@check-recursive:
+@UNITTEST2_TRUE@	echo "For testing you must install python module unittest2 and you must have python version 3.3 or larger. Run configure after install unittest2 module"
+
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
